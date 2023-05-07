@@ -1,0 +1,74 @@
+-- 創建數據庫
+CREATE DATABASE mydatabase;
+
+-- 使用數據庫
+USE mydatabase;
+
+-- 創建用戶信息表
+CREATE TABLE users (
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, -- 用戶ID，自增長
+  name VARCHAR(30) NOT NULL, -- 用戶名稱，最大長度為30個字符
+  email VARCHAR(50), -- 用戶郵箱，最大長度為50個字符
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 記錄用戶創建時間
+);
+
+-- 創建訂單信息表
+CREATE TABLE example_table (
+    id INT PRIMARY KEY, -- 訂單ID
+    name VARCHAR(50), -- 客戶名稱，最大長度為50個字符
+    age INT, -- 客戶年齡
+    email VARCHAR(100) -- 客戶郵箱，最大長度為100個字符
+);
+
+-- 插入數據到example_table表格中
+INSERT INTO example_table (id, name, age, email) VALUES
+    (1, 'John Doe', 30, 'john.doe@example.com'),
+    (2, 'Jane Doe', 25, 'jane.doe@example.com'),
+    (3, 'Bob Smith', 40, 'bob.smith@example.com');
+
+-- 向users表格中插入一行數據
+INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com');
+
+-- 向users表格中插入多行數據
+INSERT INTO users (name, email) VALUES
+('Jane Doe', 'jane.doe@example.com'),
+('Bob Smith', 'bob.smith@example.com');
+
+-- 更新users表格中id為1的行的email字段
+UPDATE users SET email = 'newemail@example.com' WHERE id = 1;
+
+-- 將users表格中所有的name為'John Doe'的行的email字段更新為新的值
+UPDATE users SET email = 'newemail@example.com' WHERE name = 'John Doe';
+-- 刪除users表格中id為1的行
+DELETE FROM users WHERE id = 1;
+
+-- 刪除users表格中所有的name為'John Doe'的行
+DELETE FROM users WHERE name = 'John Doe';
+
+# 使用 prepared statement 防止 SQL 注入攻擊
+cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+import mysql.connector
+
+# 創建數據庫連接
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="yourusername",
+  password="yourpassword"
+)
+
+# 創建游標對象
+mycursor = mydb.cursor()
+
+# 創建數據庫
+mycursor.execute("CREATE DATABASE mydatabase")
+
+# 使用數據庫
+mycursor.execute("USE mydatabase")
+
+# 創建用戶信息表
+mycursor.execute("CREATE TABLE users (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30) NOT NULL, email VARCHAR(50), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)")
+
+# 使用 prepared statement 防止 SQL 注入攻擊
+sql = "SELECT * FROM users WHERE username = %s AND password = %s"
+val = (username, password)
+mycursor.execute(sql, val)
