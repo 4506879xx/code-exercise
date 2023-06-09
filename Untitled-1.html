@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player Design</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .music {
+      width: 300px;
+      height: 200px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .music-wave {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      background-color: #000;
+      overflow: hidden;
+    }
+    .music-wave::before,
+    .music-wave::after {
+      border-radius: 50% 50% 0 0;
+      animation: wave 1.5s linear infinite;
+    }
+    .music-wave::before {
+      left: -25%;
+    }
+    .music-wave::after {
+      left: 25%;
+      animation-delay: 0.75s;
+    }
+    .bar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 200px;
+      padding: 10px;
+    }
+    .bar {
+      width: 12px;
+      border-radius: 10px;
+      animation: bar-animation 1.5s ease-in-out infinite;
+    }
+    .bar:nth-child(1) { animation-delay: 0.1s; background-color: #ffffff; }
+    .bar:nth-child(2) { animation-delay: 0.2s; background-color: #00ffff; }
+    .bar:nth-child(3) { animation-delay: 0.3s; background-color: #ffffff; }
+    .bar:nth-child(4) { animation-delay: 0.4s; background-color: #00ffff; }
+    .bar:nth-child(5) { animation-delay: 0.5s; background-color: #ffffff; }
+    .bar:nth-child(6) { animation-delay: 0.6s; background-color: #00ffff; }
+    .bar:nth-child(7) { animation-delay: 0.7s; background-color: #ffffff; }
+    .bar:nth-child(8) { animation-delay: 0.8s; background-color: #00ffff; }
+    .bar:nth-child(9) { animation-delay: 0.9s; background-color: #ffffff; }
+    .bar:nth-child(10) { animation-delay: 1s; background-color: #00ffff; }
+    @keyframes wave {
+      0% { transform: rotate(0deg); height: 50px; }
+      50% { transform: rotate(45deg); height: 150px; }
+      100% { transform: rotate(0deg); height: 50px; }
+    }
+    @keyframes bar-animation {
+      0% { height: 20px; }
+      50% { height: 120px; }
+      100% { height: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bar-container">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="container">
+    <div class="music-player">
+      <h1>Music Player</h1>
+      <div class="player-controls">
+        <button id="prevBtn" class="control-btn">
+          <i class="fas fa-step-backward"></i>
+        </button>
+        <button id="playBtn" class="control-btn">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="nextBtn" class="control-btn">
+          <i class="fas fa-step-forward"></i>
+        </button>
+      </div>
+      <div class="song-info">
+        <div class="song-thumbnail">
+          <img src="song1.jpg" alt="Song Thumbnail">
+        </div>
+        <div class="song-details">
+          <h2>Song Title</h2>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <audio id="audio" src=""></audio>
+      <ul id="playlist">
+        <li data-src="song1.mp3">Song 1</li>
+        <li data-src="song2.mp3">Song 2</li>
+        <li data-src="song3.mp3">Song 3</li>
+      </ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
